@@ -1,6 +1,6 @@
 (function(){ 
-	var e = document.getElementsByTagName("*");
-	for (var E of e) {
-		E.style.fontFamily = "Comic Sans MS";
+	var elements = document.getElementsByTagName("*");
+	for (var e of elements) {
+		e.style.fontFamily = "Comic Sans MS";
 	}
 })();
