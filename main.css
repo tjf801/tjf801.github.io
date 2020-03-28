@@ -1,0 +1,25 @@
+html {
+	background-color: #fefefe;
+}
+
+body {
+	margin: 2em auto;
+	max-width: 800px;
+	line-height: 1.4;
+	font-size: 18px;
+	color: #333;
+	padding: 1em;
+	text-align: justify;
+}
+
+h1,h2,h3 {
+	line-height: 1.2
+}
+
+a {
+	color: #009de0
+}
+
+a:visited {
+	color: #ef0577
+}
