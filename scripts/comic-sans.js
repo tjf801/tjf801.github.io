@@ -3,5 +3,4 @@
 	for (var e of elements) {
 		e.style.fontFamily = "Comic Sans MS";
 	}
-	console.log('got here lol');
 })();
