@@ -777,8 +777,9 @@ settings.fix();
 			}
 		}));
 	};
-
-	let settings = JSON.parse(localStorage.getItem('extensionSettings')) || { "developer": "Drew Snow", "gravity": { "score": 4294967295 }, "learn": { "speed": 700 }, "live": { "answerDelay": 100, "autoAnswer": 1, "displayAnswer": 1, "key": "c" }, "match": { "time": 0.5 }, "night": false, "test": { "key": "c" } };
+	
+	//HERE! -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	let settings = JSON.parse(localStorage.getItem('extensionSettings')) || { "developer": "Drew Snow", "gravity": { "score": 4294967295 }, "learn": { "speed": 700 }, "live": { "answerDelay": 100, "autoAnswer": 1, "displayAnswer": 1, "key": "c" }, "match": { "time": 0.1 }, "night": false, "test": { "key": "c" } };
 	document.getElementById('gravityScoreInput').value = settings.gravity.score;
 	document.getElementById('learnSpeedInput').value = settings.learn.speed;
 	document.getElementById('liveDelayInput').value = settings.live.answerDelay;
@@ -1433,7 +1434,7 @@ Learn.prototype.mode = () => {
 }
 function Match() {
 	this.colors = ['#87b5ff', '#7dffe5', '#7dff9e', '#daff7d', '#ffb44a', '#ff7236', '#ff3636', '#2672ff', '#756be8', '#a76be8', '#e86be4', '#ff2176', '#b89e9e', '#8a8124'];
-	this.stopTime = settings.current.match.time || 0.1;
+	this.stopTime = settings.current.match.time;
 
 	Answers.post('match', this.stopTime);
 	this.start();
@@ -1518,6 +1519,7 @@ Match.prototype.image = element => {
 	if (!elem) return document.createElement('img');
 	return elem;
 }
+
 function Micromatch() {
 	this.redirect();
 }
