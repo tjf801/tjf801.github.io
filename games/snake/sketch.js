@@ -35,7 +35,7 @@ function keyPressed() {
 }
 
 function getNewFruit() {
-	if (fruit==undefined) {fruit = new Fruit(floor(random(WIDTH)), floor(random(HEIGHT)));}
+	fruit = new Fruit(floor(random(WIDTH)), floor(random(HEIGHT)));
 	while ((fruit.x==snake.headX && fruit.y==snake.headY) || snake.inBody(fruit.x, fruit.y)) {
 		fruit = new Fruit(floor(random(WIDTH)), floor(random(HEIGHT)));
 	}
