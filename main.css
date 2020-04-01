@@ -1,5 +1,5 @@
 html {
-	background-color: #fefefe;
+	background-color: #303030;
 }
 
 body {
@@ -7,7 +7,7 @@ body {
 	max-width: 800px;
 	line-height: 1.4;
 	font-size: 18px;
-	color: #333;
+	color: #ccc;
 	padding: 1em;
 	text-align: justify;
 }
