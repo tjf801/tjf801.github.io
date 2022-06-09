@@ -72,8 +72,6 @@ nav a {
 .dropdown {
 	background-color: var(--navbar-dropdown-background);
 	position: absolute;
-	/* transform: translateX(-1em); /* TODO this dont fucking work */
-	/* ok maybe this weird thing will work but i need to test */
 	position: absolute;
 	top: 100%;
 	padding: 0.5em 0;
