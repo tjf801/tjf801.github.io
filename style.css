@@ -1,0 +1,171 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	/* TODO: change these */
+	--color-background: #fff8f8;
+	--navbar-background: black; /*pink;*/
+	--logo-text: darkblue;
+	--navbar-text: yellow;
+	--navbar-links: white;
+	--navbar-links-hover: rgb(255, 127, 0);
+	--navbar-dropdown-background: rgb(0, 255, 255);
+	--transition: 0.25s ease-out;
+}
+
+html {
+	background-color: var(--color-background);
+}
+
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* TODO: change this cuz it looks like shit */
+}
+
+nav li {
+	list-style: none;
+}
+
+nav a {
+	text-decoration: none;
+}
+
+.navbar {
+	display: flex;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	align-items: center;
+	justify-content: space-between;
+	background-color: var(--navbar-background);
+	color: var(--navbar-text);
+}
+
+.navbar-links a {
+	color: var(--navbar-links);
+}
+
+.logo a {
+	padding: 1em;
+	color: var(--logo-text);
+	font-size: 36px;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+
+.navbar-menu {
+	display: flex;
+	gap: 2em;
+	font-size: 28px;
+	margin-right: 1.5em;
+}
+
+.navbar-menu li:hover {
+	/* TODO: make these have a bigger hover background margin around the text */
+	background-color: var(--navbar-links-hover);
+	border-radius: 5px;
+	transition: var(--transition);
+	/* margin: 1em; this doesnt rlly work but its interesting maybe */
+}
+
+.dropdown {
+	background-color: var(--navbar-dropdown-background);
+	position: absolute;
+	/* transform: translateX(-1em); /* TODO this dont fucking work */
+	/* ok maybe this weird thing will work but i need to test */
+	position: absolute;
+	top: 100%;
+	padding: 0.5em 0;
+	display: none;
+	border-radius: 8px;
+}
+
+.dropdown li + li {
+	margin-top: 10px;
+}
+
+.dropdown li {
+	padding: 0.5em 0.25em;
+	width: 6em;
+	text-align: center;
+}
+
+.dropdown li:hover {
+	background-color: var(--navbar-links-hover);
+	transition: var(--transition);
+}
+
+
+.has-dropdown {
+	display: flex;
+	justify-content: center;
+	position: relative;
+}
+
+
+
+.projects:hover .projects-dropdown {
+	display: block;
+	transition: var(--transition);
+}
+
+.games:hover .games-dropdown {
+	display: block;
+	transition: var(--transition);
+}
+
+
+
+/* for mobile devices (TODO) */
+
+input[type=checkbox] {
+	display: none;
+}
+
+.hamburger {
+	display: none;
+	font-size: 30px;
+	user-select: none;
+}
+
+@media (max-width: 900px) {
+	.hamburger {
+		display: block;
+		font-size: 24px;
+		user-select: none;
+	}
+	
+	input[type=checkbox]:checked ~ .navbar-menu {
+		display: block;
+	}
+	
+	.navbar-menu {
+		display: none;
+		position: absolute;
+		background-color: var(--navbar-dropdown-background);
+		right: 0;
+		left: 0;
+		text-align: center;
+		padding: 1em 0;
+	}
+	
+	.dropdown {
+		display: block;
+		position: static;
+		padding: 0;
+		background-color: transparent;
+		border-radius: 0;
+		top: 0;
+	}
+	
+	.dropdown li {
+		padding: 0.5em 1em;
+		width: 100%;
+		text-align: center;
+	}
+
+	.dropdown li:hover {
+		background-color: var(--navbar-links-hover);
+	}
+}

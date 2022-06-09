@@ -1,15 +1,59 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>tjf801 on Github</title>
-		<link rel="stylesheet" type="text/css" href="main.css">
-	</head>
-	<body>
-		<h1>This is my website</h1>
-		<h6>Maybe i should watch a youtube tutorial on web design</h6>
+<html lang="en">
+<head>
+	<!-- i am having to learn webshit just so i can make an ad for companies to give me money fml -->
+	<meta charset="utf-8">
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="tjf801's website">
+	<meta name="author" content="tjf801">
+	
+	<link rel="icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css" />
+	
+	<!-- TODO: make a better name -->
+	<title>tjf801's website</title>
+</head>
+<body>
+	<nav class="navbar">
+		<div class="logo">
+			<a href="/">tjf801</a>
+		</div>
 		
-		<li>
-			<a href="games">Games</a>
-		</li>
-	</body>
+		<ul class="navbar-links">
+			<!-- this is such a hack i hate this -->
+			<input type="checkbox" id="navbar-toggle" />
+			<label for="navbar-toggle" class="hamburger">&#9776;</label>
+			
+			<div class="navbar-menu">
+				<li><a href="index.html">Home</a></li>
+				<li><a href="about.html">About</a></li>
+				<li class="projects has-dropdown">
+					<a href="projects.html">Projects</a>
+					<!-- getting these stupid PoSs to center literally took me an hour i hate this -->
+					<ul class="dropdown projects-dropdown">
+						<!-- TODO: put actual projects here -->
+						<li><a href="project-1.html">Project 1</a></li>
+						<li><a href="project-2.html">Project 2</a></li>
+						<li><a href="project-3.html">Project 3</a></li>
+					</ul>
+				</li>
+				<li class="games has-dropdown">
+					<a href="/games/">Games</a>
+					<ul class="dropdown games-dropdown">
+						<li><a href="games/snake/">Snake</a></li>
+						<li><a href="games/laserfocus/">Laser Focus</a></li>
+						<li><a href="games/minesweeper/">Mine Sweeper</a></li>
+					</ul>
+				</li>
+				<li><a href="contact.html">Contact</a></li>
+			</div>
+		</ul>
+	</nav>
+	
+	<main>
+		<!-- TODO: content -->
+	</main>
+</body>
 </html>
