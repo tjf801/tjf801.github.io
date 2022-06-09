@@ -113,6 +113,10 @@ nav a {
 	transition: var(--transition);
 }
 
+.games-dropdown li {
+	width: 8em;
+}
+
 
 
 /* for mobile devices (TODO) */
