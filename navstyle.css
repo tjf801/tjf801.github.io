@@ -8,6 +8,8 @@ nav {
 	--navbar-dropdown-background: rgb(0, 255, 255);
 	
 	--transition: 0.25s ease-out;
+	
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* TODO: change this cuz it looks like shit */
 }
 
 nav li {
