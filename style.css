@@ -1,11 +1,21 @@
 :root {
 	--color-background: #fff8f8;
+	--gray1: rgb(128, 128, 128);
+	--gray2: rgb(80, 80, 80);
 }
 
 html {
 	background-color: var(--color-background);
 }
 
+.text {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h1.title.text {
+	font-size: 100px;
+}
+
 body {
-	
+	margin: 0;
 }
