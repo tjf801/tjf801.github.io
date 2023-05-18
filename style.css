@@ -2,20 +2,33 @@
 	--color-background: #fff8f8;
 	--gray1: rgb(128, 128, 128);
 	--gray2: rgb(80, 80, 80);
+	
+	--max-width: 50em;
 }
 
 html {
 	background-color: var(--color-background);
 }
 
+.page-content {
+	max-width: var(--max-width);
+	margin: auto;
+}
+
 .text {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	margin-left: 2.5%;
+	margin-right: 2.5%;
 }
 
-h1.title.text {
-	font-size: 100px;
+.title {
+	font-size: 4em;
 }
 
-body {
-	margin: 0;
+.author {
+	font-size: 2em;
+}
+
+.p {
+	display: inline;
 }

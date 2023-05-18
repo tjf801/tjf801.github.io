@@ -5,7 +5,7 @@ nav {
 	--navbar-text: var(--gray1);
 	--navbar-links: var(--gray1);
 	--navbar-links-hover: rgb(255, 127, 0);
-	--navbar-dropdown-background: rgb(0, 255, 255);
+	--navbar-dropdown-background: rgba(0, 255, 255, 0.5);
 	
 	--transition: 0.25s ease-out;
 	
@@ -31,6 +31,11 @@ nav a {
 	justify-content: space-between;
 	background-color: var(--navbar-background);
 	color: var(--navbar-text);
+}
+
+.navbar-links {
+	padding-inline-start: 0px;
+	/* margin: auto; */
 }
 
 .navbar-links a {
@@ -120,7 +125,7 @@ input[type=checkbox] {
 	user-select: none;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 795px) {
 	.hamburger {
 		display: block;
 		font-size: 24px;
