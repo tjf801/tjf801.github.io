@@ -1,0 +1,15 @@
+{
+  "name": "rust-physics-wasm",
+  "collaborators": [
+    "ur mom"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "rust_physics_wasm_bg.wasm",
+    "rust_physics_wasm.js",
+    "rust_physics_wasm.d.ts"
+  ],
+  "module": "rust_physics_wasm.js",
+  "types": "rust_physics_wasm.d.ts",
+  "sideEffects": false
+}

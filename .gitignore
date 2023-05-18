@@ -1,3 +1,13 @@
 run.bat
-/games/ndle-wasm-src
-projects/**
+/games/Ndle
+
+projects/physics/*
+!projects/physics/pkg/
+!projects/physics/index.html
+!projects/physics/no_server.js
+!projects/physics/src/**
+!projects/physics/Cargo.toml
+!projects/physics/index.js
+!projects/physics/package.json
+!projects/physics/web.config
+!projects/physics/webpack.config.js
