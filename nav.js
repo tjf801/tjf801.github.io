@@ -8,7 +8,7 @@ fetch('/nav.html')
         const layers = window.location.pathname.split("/").length - 2;
         let newelem = document.createElement("div");
         newelem.innerHTML = text.replaceAll(
-            /href=\"\/?([0-9\-\.a-zA-Z][0-9\/\-\.a-zA-Z]*)\"/g,
+            /href=\"\/?([0-9\-\.\?=a-zA-Z][0-9\/\-\.\?=a-zA-Z]*)\"/g,
             "href=\""+ '../'.repeat(layers) + (layers?'':'/') + "$1\""
         );
         console.log(newelem.innerHTML);
