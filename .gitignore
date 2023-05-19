@@ -1,5 +1,4 @@
 run.bat
-/games/Ndle
 
 projects/physics/*
 !projects/physics/pkg/
