@@ -78,8 +78,9 @@ function resizeBoard(board_grid) {board_grid.style.width = `${getGameWidth()}px`
 
 function getAnswerLists(word_length) {
 	switch (word_length) {
-		case 5: return [constants.WORDLE_VALID_GUESSES, constants.WORDLE_POSSIBLE_ANSWERS];
 		case 3: return [constants.SHORTLE_POSSIBLE_ANSWERS, constants.SHORTLE_POSSIBLE_ANSWERS]; // TODO
+		case 4: return [constants.FOURDLE_POSSIBLE_ANSWERS, constants.FOURDLE_POSSIBLE_ANSWERS]; // TODO
+		case 5: return [constants.WORDLE_VALID_GUESSES, constants.WORDLE_POSSIBLE_ANSWERS];
 		default: throw new Error("Board size not implemented yet");
 	}
 }
