@@ -85,6 +85,7 @@ function getAnswerLists(word_length) {
 		case 4: return [constants.FOURDLE_POSSIBLE_ANSWERS, constants.FOURDLE_POSSIBLE_ANSWERS]; // TODO
 		case 5: return [constants.WORDLE_VALID_GUESSES, constants.WORDLE_POSSIBLE_ANSWERS];
 		case 6: return [constants.MOREDLE_POSSIBLE_ANSWERS, constants.MOREDLE_POSSIBLE_ANSWERS]; // TODO
+		case 7: return [constants.SEVENDLE_VALID_GUESSES, constants.SEVENDLE_POSSIBLE_ANSWERS];
 		default: {
 			console.log("Board size not implemented yet");
 			return [[], []];
