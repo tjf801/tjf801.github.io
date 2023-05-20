@@ -9,6 +9,9 @@
 	--color-yellow: #c9b458;
 	--color-green: #6aaa64;
 	
+	--key-background: #d6d6da;
+	--key-text-color: var(--gray1);
+	
 	--keyboard-height: 200px;
 	--game-max-width: 500px;
 	--header-height: 65px; /* TODO */
@@ -115,13 +118,6 @@ header {
 }
 
 
-#keyboard-container {
-	height: var(--keyboard-height);
-	margin: 0 8px;
-	display: block;
-	background-color: var(--gray7);
-}
-
 #game-toast-container {
 	z-index: 1000;
 	position: absolute;
@@ -202,3 +198,63 @@ header {
 	animation-duration: 250ms;
 	animation-timing-function: ease-out;
 }
+
+
+#keyboard-container {
+	height: var(--keyboard-height);
+	margin: 0 8px;
+	background-color: var(--gray7);
+}
+
+.keyboard-row {
+	display: flex;
+	width: 100%;
+	margin: 0 auto 8px;
+}
+
+.keyboard-key {
+	text-transform: uppercase;
+	font-size: 1.25em;
+	font-weight: bold;
+	border: 0;
+	padding: 0;
+	margin: 0 6px 0 0;
+	height: 58px;
+	border-radius: 4px;
+	cursor: pointer;
+	user-select: none;
+	background-color: var(--key-background);
+	color: var(--key-text-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex: 1;
+}
+
+.keyboard-key[state=absent] {
+	background-color: var(--color-gray);
+	color: var(--gray7)
+}
+.keyboard-key[state=present] {
+	background-color: var(--color-yellow);
+	color: var(--gray7)
+}
+.keyboard-key[state=correct] {
+	background-color: var(--color-green);
+	color: var(--gray7)
+}
+
+.keyboard-key:last-of-type {
+	margin: 0;
+}
+
+.big-key {
+	font-size: 12px;
+	flex: 1.5;
+}
+
+.keyboard-spacer {
+	flex: 0.5;
+}
+
+

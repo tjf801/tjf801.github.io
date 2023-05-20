@@ -155,7 +155,60 @@ function initializeBoard(board_width, board_height) {
 
 
 function initializeKeyboard() {
-	// TODO
+	const ROWS = ["qwertyuiop", "asdfghjkl", "↵zxcvbnm←"];
+	
+	const keyboard = document.getElementById("keyboard-container");
+	if (keyboard == null) throw new Error("unreachable");
+	
+	var keys = {};
+	
+	for (var i = 0; i < ROWS.length; ++i) {
+		let row = document.createElement("div");
+		row.className = "keyboard-row";
+		
+		for (var j = 0; j < ROWS[i].length; ++j) {
+			/** @type {String} */
+			let letter = ROWS[i].charAt(j);
+			
+			let keyButton = document.createElement("button");
+			keyButton.type = "button";
+			keyButton.classList.add("keyboard-key");
+			keyButton.setAttribute("letter", letter);
+			
+			if (letter.match(/^[a-z]$/)) {
+				keyButton.innerHTML = letter;
+				keyButton.addEventListener('click', () => pressKey(letter));
+			} else {
+				keyButton.classList.add("big-key");
+				if (letter == "↵") {
+					keyButton.innerHTML = "ENTER";
+					keyButton.addEventListener('click', () => pressKey("Enter"));
+				} else if (letter == "←") {
+					// i am so sorry.
+					keyButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="20"><path fill="var(--gray-1)" d="M22 3H7c-.69 0-1.23.35-1.59.88L0 12l5.41 8.11c.36.53.9.89 1.59.89h15c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H7.07L2.4 12l4.66-7H22v14zm-11.59-2L14 13.41 17.59 17 19 15.59 15.41 12 19 8.41 17.59 7 14 10.59 10.41 7 9 8.41 12.59 12 9 15.59z"></path></svg>`;
+					keyButton.addEventListener('click', () => pressKey("Backspace"));
+				} else {
+					throw new Error("unreachable..?")
+				}
+			}
+			
+			row.appendChild(keyButton);
+			keys[letter] = keyButton;
+		}
+		
+		if (i == 1) {
+			let spacer1 = document.createElement('div');
+			spacer1.className = "keyboard-spacer";
+			row.prepend(spacer1);
+			let spacer2 = document.createElement('div');
+			spacer2.className = "keyboard-spacer";
+			row.append(spacer2);
+		}
+		
+		keyboard.appendChild(row);
+	}
+	
+	return keys;
 }
 
 function endGame(toast_msg) {
@@ -200,115 +253,128 @@ function getClues(_guess, _answer) {
 	})
 }
 
-function main() {
-	// initial call
-	let board_grid = initializeBoard(WORDLE_WORD_LENGTH, WORDLE_GUESSES);
-	
-	let current_letter = 0;
-	let current_guess = 0;
-	
-	window.addEventListener("keydown", (event) => {
-		if (gameover || guessing) {
+let keys = initializeKeyboard();
+let board_grid = initializeBoard(WORDLE_WORD_LENGTH, WORDLE_GUESSES);
+
+let current_letter = 0;
+let current_guess = 0;
+
+function pressKey(key) {
+	if (gameover || guessing) {
+		return;
+	} else if (key.match(/^[a-zA-Z]$/)) {
+		if (current_letter < board_grid.board_width) {
+			// TODO: do the little animation thing
+			board_grid.children[current_guess].children[current_letter].children[0].innerHTML = key;
+			board_grid.children[current_guess].children[current_letter++].children[0].setAttribute('state', 'letter');
+		}
+	} else if (key === "Backspace") {
+		if (current_letter > 0) {
+			board_grid.children[current_guess].children[--current_letter].children[0].innerHTML = '';
+			board_grid.children[current_guess].children[current_letter].children[0].setAttribute('state', 'empty');
+		}
+	} else if (key === "Enter") {
+		function invalid(msg) {
+			displayToast(msg);
+			board_grid.children[current_guess].classList.add('shake');
+			setTimeout(() => {board_grid.children[current_guess].classList.remove('shake');}, 600);
+		}
+		
+		// "Not enough letters" toast
+		if (current_letter < board_grid.board_width) {
+			invalid('Not enough letters');
 			return;
-		} else if (event.key.match(/^[a-zA-Z]$/)) {
-			if (current_letter < board_grid.board_width) {
-				// TODO: do the little animation thing
-				board_grid.children[current_guess].children[current_letter].children[0].innerHTML = event.key;
-				board_grid.children[current_guess].children[current_letter++].children[0].setAttribute('state', 'letter');
-			}
-		} else if (event.key === "Backspace") {
-			if (current_letter > 0) {
-				board_grid.children[current_guess].children[--current_letter].children[0].innerHTML = '';
-				board_grid.children[current_guess].children[current_letter].children[0].setAttribute('state', 'empty');
-			}
-		} else if (event.key === "Enter") {
-			function invalid(msg) {
-				displayToast(msg);
-				board_grid.children[current_guess].classList.add('shake');
-				setTimeout(() => {board_grid.children[current_guess].classList.remove('shake');}, 600);
-			}
-			
-			// "Not enough letters" toast
-			if (current_letter < board_grid.board_width) {
-				invalid('Not enough letters');
-				return;
-			}
-			
-			const word = Array.from(board_grid.children[current_guess].children)
-							.map(child => child.firstChild.innerHTML) // maps a cell-container to its cell's letter
-							.join('');
-			
-			// "Not in word list" toast
-			if (!board_grid.valid_guesses.includes(word) && !board_grid.possible_answers.includes(word)) {
-				invalid("Not in word list");
-				return;
-			}
-			
-			if (IS_HARDMODE) {
-				// "{i}th letter must be {letter}"
-				// "Guess must contain {letter}"
-				// TODO: hardmode
-			}
-			
-			let clues = getClues(word, board_grid.answer);
-			
-			// display clues
-			Array.from(board_grid.children[current_guess].children).forEach((cell, i) => {
-				// TODO: this is not actually reverse engineered
-				//       it is 100% just trial and error and isnt the same
-				setTimeout(() => {
-					cell.firstChild.classList.add('flip-in');
-					setTimeout(() => {
-						cell.firstChild.classList.remove('flip-in');
-						
-						cell.firstChild.setAttribute('state', clues[i]);
-						
-						cell.firstChild.classList.add('flip-out');
-					}, 250);
-					setTimeout(() => {
-						cell.firstChild.classList.remove('flip-out');
-					}, 500);
-				}, 10 + i * 300);
-			});
-			
-			guessing = true;
-			
-			current_guess += 1;
-			current_letter = 0;
-			
-			// delay until flip animations are complete
+		}
+		
+		const word = Array.from(board_grid.children[current_guess].children)
+						.map(child => child.firstChild.innerHTML) // maps a cell-container to its cell's letter
+						.join('');
+		
+		// "Not in word list" toast
+		if (!board_grid.valid_guesses.includes(word) && !board_grid.possible_answers.includes(word)) {
+			invalid("Not in word list");
+			return;
+		}
+		
+		if (IS_HARDMODE) {
+			// "{i}th letter must be {letter}"
+			// "Guess must contain {letter}"
+			// TODO: hardmode
+		}
+		
+		let clues = getClues(word, board_grid.answer);
+		
+		// display clues
+		Array.from(board_grid.children[current_guess].children).forEach((cell, i) => {
+			// TODO: this is not actually reverse engineered
+			//       it is 100% just trial and error and isnt the same
 			setTimeout(() => {
-				// displayToast(`guess ${current_guess}`);
-				
-				guessing = false;
-				
-				// if won: display the win toast
-				if (word === board_grid.answer) {
-					if (current_guess == 1) {
-						endGame("Genius");
-					} else if (current_guess == board_grid.board_height) {
-						endGame("Phew");
-					} else {
-						endGame(
-							[
-								"Genius", 
-								"Magnificent", 
-								"Impressive", 
-								"Splendid", 
-								"Great",
-								"Nice",
-								"Good",
-								// "Phew"
-							][current_guess-1]
-						);
+				cell.firstChild.classList.add('flip-in');
+				setTimeout(() => {
+					cell.firstChild.classList.remove('flip-in');
+					
+					cell.firstChild.setAttribute('state', clues[i]);
+					
+					cell.firstChild.classList.add('flip-out');
+				}, 250);
+				setTimeout(() => {
+					cell.firstChild.classList.remove('flip-out');
+				}, 500);
+			}, 10 + i * 300);
+		});
+		
+		guessing = true;
+		
+		current_guess += 1;
+		current_letter = 0;
+		
+		// delay until flip animations are complete
+		setTimeout(() => {
+			for (var i = 0; i < board_grid.board_width; ++i) {
+				let button = keys[word.charAt(i)];
+				switch (button.getAttribute('state')) {
+					case null: 
+					case 'absent': {
+						button.setAttribute('state', clues[i]);
+						break;
 					}
+					case 'present': {
+						if (clues[i] != 'absent')
+							button.setAttribute('state', clues[i])
+						break;
+					}
+					case 'correct': break;
 				}
 				
-				else if (current_guess >= board_grid.board_height)
-					endGame(board_grid.answer.toUpperCase());
-			}, 510 + (board_grid.board_width-1) * 300);
-		}
-	});
+			}
+			
+			guessing = false;
+			
+			// if won: display the win toast
+			if (word === board_grid.answer) {
+				if (current_guess == 1) {
+					endGame("Genius");
+				} else if (current_guess == board_grid.board_height) {
+					endGame("Phew");
+				} else {
+					endGame(
+						[
+							"Genius", 
+							"Magnificent", 
+							"Impressive", 
+							"Splendid", 
+							"Great",
+							"Nice",
+							"Good",
+							// "Phew"
+						][current_guess-1]
+					);
+				}
+			} else if (current_guess >= board_grid.board_height)
+				endGame(board_grid.answer.toUpperCase());
+			
+		}, 510 + (board_grid.board_width-1) * 300);
+	}
 }
 
-main();
+window.addEventListener("keydown", (event) => pressKey(event.key));
