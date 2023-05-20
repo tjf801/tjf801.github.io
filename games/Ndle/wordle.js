@@ -24,7 +24,10 @@ function getGuesses(size) {
 		case 5: return 6;
 		case 6: return 5;
 		case 7: return 4;
-		default: throw Error("Invalid size param");
+		default: {
+			console.log("invalid size parameter");
+			return 1;
+		}
 	}
 }
 
@@ -36,7 +39,7 @@ function setTitle(size) {
 		case 5: title = "5-DLE"; break; // TODO
 		case 6: title = "MOREDLE"; break;
 		case 7: title = "7-DLE"; break;
-		default: title = "Title Not Implemented";
+		default: title = "Not Implemented";
 	}
 	document.getElementById('title').innerHTML = title;
 }
@@ -81,7 +84,11 @@ function getAnswerLists(word_length) {
 		case 3: return [constants.SHORTLE_POSSIBLE_ANSWERS, constants.SHORTLE_POSSIBLE_ANSWERS]; // TODO
 		case 4: return [constants.FOURDLE_POSSIBLE_ANSWERS, constants.FOURDLE_POSSIBLE_ANSWERS]; // TODO
 		case 5: return [constants.WORDLE_VALID_GUESSES, constants.WORDLE_POSSIBLE_ANSWERS];
-		default: throw new Error("Board size not implemented yet");
+		case 6: return [constants.MOREDLE_POSSIBLE_ANSWERS, constants.MOREDLE_POSSIBLE_ANSWERS]; // TODO
+		default: {
+			console.log("Board size not implemented yet");
+			return [[], []];
+		}
 	}
 }
 
