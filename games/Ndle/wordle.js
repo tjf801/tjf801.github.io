@@ -76,7 +76,12 @@ function getGameWidth() {
 		+ (WORDLE_WORD_LENGTH - 1) * 5 // 5 px grid spacing
 		+ 10 * 2; // 10 px margin on board-grid
 }
-function resizeBoard(board_grid) {board_grid.style.width = `${getGameWidth()}px`;}
+function resizeBoard(_) {
+	const board_grid = document.getElementById('board-container').firstChild;
+	// const keyboard = document.getElementById('keyboard-container');
+	board_grid.style.width = `${getGameWidth()}px`;
+	// keyboard.style.maxWidth = `${getGameWidth() * 1.2}px`;
+}
 
 
 function getAnswerLists(word_length) {

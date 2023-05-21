@@ -12,8 +12,8 @@
 	--key-background: #d6d6da;
 	--key-text-color: var(--gray1);
 	
-	--keyboard-height: 200px;
-	--game-max-width: 500px;
+	/* --keyboard-height: 200px;
+	--game-max-width: 500px; */
 	--header-height: 65px; /* TODO */
 	--header-padding: 20px; /* TODO */
 }
@@ -63,7 +63,7 @@ header {
     justify-content: center;
     align-items: center;
 	overflow: hidden;
-	height: calc(100% - var(--keyboard-height));
+	height: 75%; /* calc(100% - var(--keyboard-height)) */
 }
 
 .board-grid {
@@ -201,14 +201,16 @@ header {
 
 
 #keyboard-container {
-	height: var(--keyboard-height);
+	height: 25%;/* var(--keyboard-height); */
 	margin: 0 8px;
 	background-color: var(--gray7);
+	/* max-width: 600px; */
 }
 
 .keyboard-row {
 	display: flex;
 	width: 100%;
+	height: calc((100% - 24px)/3);
 	margin: 0 auto 8px;
 }
 
@@ -219,7 +221,7 @@ header {
 	border: 0;
 	padding: 0;
 	margin: 0 6px 0 0;
-	height: 58px;
+	height: 100%;
 	border-radius: 4px;
 	cursor: pointer;
 	user-select: none;
