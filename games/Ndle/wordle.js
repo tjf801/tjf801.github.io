@@ -86,10 +86,10 @@ function resizeBoard(_) {
 
 function getAnswerLists(word_length) {
 	switch (word_length) {
-		case 3: return [constants.SHORTLE_POSSIBLE_ANSWERS, constants.SHORTLE_POSSIBLE_ANSWERS]; // TODO
-		case 4: return [constants.FOURDLE_POSSIBLE_ANSWERS, constants.FOURDLE_POSSIBLE_ANSWERS]; // TODO
+		case 3: return [constants.SHORTLE_VALID_GUESSES, constants.SHORTLE_POSSIBLE_ANSWERS]; // TODO
+		case 4: return [constants.FOURDLE_VALID_GUESSES, constants.FOURDLE_POSSIBLE_ANSWERS]; // TODO
 		case 5: return [constants.WORDLE_VALID_GUESSES, constants.WORDLE_POSSIBLE_ANSWERS];
-		case 6: return [constants.MOREDLE_POSSIBLE_ANSWERS, constants.MOREDLE_POSSIBLE_ANSWERS]; // TODO
+		case 6: return [constants.MOREDLE_VALID_GUESSES, constants.MOREDLE_POSSIBLE_ANSWERS]; // TODO
 		case 7: return [constants.SEVENDLE_VALID_GUESSES, constants.SEVENDLE_POSSIBLE_ANSWERS];
 		default: {
 			console.log("Board size not implemented yet");
@@ -163,6 +163,7 @@ function initializeBoard(board_width, board_height) {
 	board_grid.possible_answers = possible_answers;
 	
 	board_grid.answer = getWordleAnswer(board_grid.possible_answers);
+	console.log(board_grid.answer);
 	
 	return board_grid;
 }

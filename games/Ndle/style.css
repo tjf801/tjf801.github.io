@@ -204,7 +204,10 @@ header {
 	height: 25%;/* var(--keyboard-height); */
 	margin: 0 8px;
 	background-color: var(--gray7);
-	/* max-width: 600px; */
+	max-width: 600px;
+	display: flex;
+    flex-direction: column;
+	justify-content: center;
 }
 
 .keyboard-row {

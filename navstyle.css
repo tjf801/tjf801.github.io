@@ -33,13 +33,18 @@ nav a {
 	color: var(--navbar-text);
 }
 
+.navbar-menu .current-page {
+	background-color: var(--navbar-background);
+	color: var(--navbar-text);
+}
+
 .navbar-links {
 	padding-inline-start: 0px;
 	/* margin: auto; */
 }
 
 .navbar-links a {
-	color: var(--navbar-links);
+	color: var(--navbar-text);
 }
 
 .logo a {
